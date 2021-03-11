@@ -37,6 +37,17 @@ pub fn get_associated_token_address(
     get_associated_token_address_and_bump_seed(&wallet_address, &spl_token_mint_address, &id()).0
 }
 
+/// Checks whether the query address is the associated token account address for the given wallet
+/// address and token mint
+pub fn is_associated_token_account_address(
+    query_address: &Pubkey,
+    wallet_address: &Pubkey,
+    spl_token_mint_address: &Pubkey,
+) -> bool {
+    let ata_address = get_associated_token_address(wallet_address, spl_token_mint_address);
+    *query_address == ata_address
+}
+
 fn get_associated_token_address_and_bump_seed_internal(
     wallet_address: &Pubkey,
     spl_token_mint_address: &Pubkey,
